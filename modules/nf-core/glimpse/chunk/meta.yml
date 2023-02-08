@@ -43,7 +43,7 @@ output:
       description: File containing software versions
       pattern: "versions.yml"
 
-  - txt:
+  - chunk_chr:
       type: file
       description: Tab delimited output txt file containing buffer and imputation regions.
       pattern: "*.{txt}"

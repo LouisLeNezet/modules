@@ -11,8 +11,7 @@ process BCFTOOLS_CSQ {
 
     input:
     tuple val(meta), path(vcf)
-    tuple val(meta2), path(fasta)
-    tuple val(meta3), path(fai)
+    tuple val(meta2), path(fasta), path(fai)
     tuple val(meta4), path(gff3)
 
     output:
@@ -28,9 +27,11 @@ process BCFTOOLS_CSQ {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
-    extension = getVcfExtension(args);
+    def extension = getInputExtension(args);
 
-    if ("$vcf" == "${prefix}.${extension}") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    input.collect{
+        if (it.name == "${prefix}.${extension}") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    }
 
     """
     bcftools csq \\
@@ -50,16 +51,15 @@ process BCFTOOLS_CSQ {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    extension = getVcfExtension(args);
+    def extension = getInputExtension(args)
+    def index = getIndexExtension(args)
 
-    def index = args.contains("--write-index=tbi") || args.contains("-W=tbi") ? "tbi" :
-                args.contains("--write-index=csi") || args.contains("-W=csi") ? "csi" :
-                args.contains("--write-index") || args.contains("-W") ? "csi" :
-                ""
     def create_cmd = extension.endsWith(".gz") ? "echo '' | gzip >" : "touch"
     def create_index = extension.endsWith(".gz") && index.matches("csi|tbi") ? "touch ${prefix}.${extension}.${index}" : ""
 
-    if ("$vcf" == "${prefix}.${extension}") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    input.collect{
+        if (it.name == "${prefix}.${extension}") error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    }
 
     """
     ${create_cmd} ${prefix}.${extension}
@@ -71,11 +71,19 @@ process BCFTOOLS_CSQ {
     END_VERSIONS
     """
 }
+
 // Custom Functions
-String getVcfExtension(String args) {
+String getInputExtension(String args) {
     return args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
         args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
         args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
         args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
-        "vcf";
+        "vcf.gz";
+}
+
+String getIndexExtension(String args) {
+    return args.contains("--write-index=tbi") || args.contains("-W=tbi") ? "tbi" :
+        args.contains("--write-index=csi") || args.contains("-W=csi") ? "csi" :
+        args.contains("--write-index") || args.contains("-W") ? "csi" :
+        ""
 }

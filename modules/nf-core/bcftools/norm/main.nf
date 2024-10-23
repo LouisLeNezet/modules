@@ -8,8 +8,8 @@ process BCFTOOLS_NORM {
         'biocontainers/bcftools:1.20--h8b25389_0' }"
 
     input:
-    tuple val(meta), path(vcf), path(tbi)
-    tuple val(meta2), path(fasta)
+    tuple val(meta), path(input), path(index)
+    tuple val(meta2), path(fasta), path(fai)
 
     output:
     tuple val(meta), path("*.{vcf,vcf.gz,bcf,bcf.gz}"), emit: vcf
@@ -35,7 +35,7 @@ process BCFTOOLS_NORM {
         --output ${prefix}.${extension} \\
         $args \\
         --threads $task.cpus \\
-        ${vcf}
+        $input
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

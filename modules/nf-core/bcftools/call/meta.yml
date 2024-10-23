@@ -23,7 +23,7 @@ input:
         description: |
           Groovy Map containing sample information
           e.g. [ id:'test', single_end:false ]
-    - vcf:
+    - input:
         type: file
         description: |
           The vcf file to be inspected.

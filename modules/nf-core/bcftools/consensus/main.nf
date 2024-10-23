@@ -8,7 +8,7 @@ process BCFTOOLS_CONSENSUS {
         'biocontainers/bcftools:1.20--h8b25389_0' }"
 
     input:
-    tuple val(meta), path(vcf), path(tbi), path(fasta), path(mask)
+    tuple val(meta), path(input), path(index), path(fasta), path(mask)
 
     output:
     tuple val(meta), path('*.fa'), emit: fasta
@@ -21,6 +21,7 @@ process BCFTOOLS_CONSENSUS {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def masking = mask ? "-m $mask" : ""
+
     """
     cat $fasta \\
         | bcftools \\

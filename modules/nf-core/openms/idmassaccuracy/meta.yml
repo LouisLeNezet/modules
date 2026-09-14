@@ -1,6 +1,5 @@
 name: "openms_idmassaccuracy"
-description: Calculates a distribution of the mass error from given mass spectra and
-  IDs.
+description: Calculates a distribution of the mass error from given mass spectra and IDs.
 deprecated: true
 keywords:
   - mass_error
@@ -8,13 +7,13 @@ keywords:
   - proteomics
 tools:
   - "openms":
-      description: "OpenMS is an open-source software C++ library for LC-MS data management
-        and analyses"
+      description: "OpenMS is an open-source software C++ library for LC-MS data management and analyses"
       homepage: "https://openms.de"
       documentation: "https://openms.readthedocs.io/en/latest/index.html"
       tool_dev_url: "https://github.com/OpenMS/OpenMS"
       doi: "10.1038/s41592-024-02197-7"
-      licence: ["BSD"]
+      licence:
+        - "BSD"
       identifier: ""
 
 input:
@@ -69,5 +68,10 @@ output:
         pattern: "versions.yml"
         ontologies:
           - edam: http://edamontology.org/format_3750 # YAML
+topics:
+  versions:
+    - versions.yml:
+        type: string
+        description: The name of the process
 authors:
   - "@jonasscheid"

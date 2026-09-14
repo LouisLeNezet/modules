@@ -1,7 +1,5 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "mcstaging_imc2mc"
-description: Staging module for MCMICRO transforming Imaging Mass Cytometry .txt files
-  to .tif files with OME-XML metadata. Includes optional hot pixel removal.
+description: Staging module for MCMICRO transforming Imaging Mass Cytometry .txt files to .tif files with OME-XML metadata. Includes optional hot pixel removal.
 deprecated: true
 keywords:
   - imaging
@@ -14,11 +12,11 @@ tools:
       homepage: "https://github.com/SchapiroLabor/imc2mc"
       documentation: "https://github.com/SchapiroLabor/imc2mc"
       tool_dev_url: "https://github.com/SchapiroLabor/imc2mc"
-      licence: ["GPL-3.0 license"]
+      licence:
+        - "GPL-3.0 license"
       identifier: ""
 
 input:
-  # Only when we have meta
   - - meta:
         type: map
         description: |
@@ -49,6 +47,11 @@ output:
         pattern: "versions.yml"
         ontologies:
           - edam: http://edamontology.org/format_3750 # YAML
+topics:
+  versions:
+    - versions.yml:
+        type: string
+        description: The name of the process
 authors:
   - "@MargotCh"
 maintainers:

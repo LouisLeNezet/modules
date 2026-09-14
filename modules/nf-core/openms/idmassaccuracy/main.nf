@@ -11,9 +11,9 @@ process OPENMS_IDMASSACCURACY {
     tuple val(meta), path(mzmls), path(idxmls)
 
     output:
-    tuple val(meta), path("*frag_mass_err.tsv") , emit: frag_err
-    tuple val(meta), path("*prec_mass_err.tsv") , emit: prec_err, optional: true
-    path "versions.yml"                         , emit: versions
+    tuple val(meta), path("*frag_mass_err.tsv"), emit: frag_err
+    tuple val(meta), path("*prec_mass_err.tsv"), emit: prec_err, optional: true
+    path "versions.yml", emit: versions, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

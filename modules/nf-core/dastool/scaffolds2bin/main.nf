@@ -14,7 +14,7 @@ process DASTOOL_SCAFFOLDS2BIN {
 
     output:
     tuple val(meta), path("*.tsv"), emit: scaffolds2bin
-    path "versions.yml"                         , emit: versions
+    path "versions.yml", emit: versions, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

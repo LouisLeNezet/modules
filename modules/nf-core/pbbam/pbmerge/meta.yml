@@ -1,7 +1,5 @@
 name: pbbam_pbmerge
-description: The pbbam software package provides components to create, query, & edit
-  PacBio BAM files and associated indices. These components include a core C++ library,
-  bindings for additional languages, and command-line utilities.
+description: The pbbam software package provides components to create, query, & edit PacBio BAM files and associated indices. These components include a core C++ library, bindings for additional languages, and command-line utilities.
 deprecated: true
 keywords:
   - pbbam
@@ -13,7 +11,8 @@ tools:
       homepage: https://github.com/PacificBiosciences/pbbioconda
       documentation: https://pbbam.readthedocs.io/en/latest/tools/pbmerge.html
       tool_dev_url: https://github.com/pacificbiosciences/pbbam/
-      licence: ["BSD-3-Clause-Clear"]
+      licence:
+        - "BSD-3-Clause-Clear"
       identifier: ""
 input:
   - - meta:
@@ -56,6 +55,11 @@ output:
         pattern: "versions.yml"
         ontologies:
           - edam: http://edamontology.org/format_3750 # YAML
+topics:
+  versions:
+    - versions.yml:
+        type: string
+        description: The name of the process
 authors:
   - "@sguizard"
 maintainers:

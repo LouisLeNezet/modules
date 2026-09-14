@@ -7,11 +7,11 @@ keywords:
   - MSI
 tools:
   - msisensor:
-      description: MSIsensor is a C++ program to detect replication slippage variants
-        at microsatellite regions, and differentiate them as somatic or germline.
+      description: MSIsensor is a C++ program to detect replication slippage variants at microsatellite regions, and differentiate them as somatic or germline.
       homepage: https://github.com/ding-lab/msisensor
       doi: "10.1093/bioinformatics/btt755"
-      licence: ["MIT"]
+      licence:
+        - "MIT"
       identifier: biotools:msisensor
 input:
   - - meta:
@@ -43,6 +43,11 @@ output:
         pattern: "versions.yml"
         ontologies:
           - edam: http://edamontology.org/format_3750 # YAML
+topics:
+  versions:
+    - versions.yml:
+        type: string
+        description: The name of the process
 authors:
   - "@kevbrick"
 maintainers:

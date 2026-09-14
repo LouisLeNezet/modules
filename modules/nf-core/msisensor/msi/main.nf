@@ -15,7 +15,7 @@ process MSISENSOR_MSI {
     tuple val(meta), path("${prefix}_dis")     , emit: output_dis
     tuple val(meta), path("${prefix}_germline"), emit: output_germline
     tuple val(meta), path("${prefix}_somatic") , emit: output_somatic
-    path "versions.yml"                        , emit: versions
+    path "versions.yml", emit: versions, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

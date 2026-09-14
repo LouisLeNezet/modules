@@ -8,7 +8,7 @@ process KRONA_KRONADB {
 
     output:
     path 'taxonomy/taxonomy.tab', emit: db
-    path "versions.yml"         , emit: versions
+    path "versions.yml", emit: versions, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

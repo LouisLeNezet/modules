@@ -13,7 +13,7 @@ process PBBAM_PBMERGE {
     output:
     tuple val(meta), path("*.bam"), emit: bam
     tuple val(meta), path("*.pbi"), emit: pbi
-    path "versions.yml"           , emit: versions
+    path "versions.yml", emit: versions, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
